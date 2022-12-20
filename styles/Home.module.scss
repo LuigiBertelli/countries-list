@@ -1,4 +1,6 @@
+@import 'assets/Styles/colors';
+
 .main {
-  padding: 10% 5%;
-  background-color: rgba(130, 85, 118, 0.612);
+  padding: 5%;
+  background-image: linear-gradient(to bottom right, $primary-color, $accent-color);
 }

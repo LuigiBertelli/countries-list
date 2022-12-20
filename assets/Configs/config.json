@@ -1,3 +1,4 @@
 {
-    "COUNTRIES_GET_ALL_URL": "https://restcountries.com/v3.1/all"
+    "COUNTRIES_GET_ALL_URL": "https://restcountries.com/v3.1/all",
+    "COUNTRIES_GET_BY_NAME_URL": "https://restcountries.com/v3.1/name/"
 }
