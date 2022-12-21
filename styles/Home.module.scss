@@ -1,6 +1,8 @@
 @import 'assets/Styles/colors';
 
 .main {
+  display: block;
+  min-height: 100vh;
   padding: 5%;
   background-image: linear-gradient(to bottom right, $primary-color, $accent-color);
 }

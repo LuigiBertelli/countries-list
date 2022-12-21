@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { CountriesTable } from '../assets/Components/CountriesTable'
-import { CountrySearch } from '../assets/Components/CountrySearch'
 
 import config from '../assets/Configs/config.json'
 
@@ -10,7 +9,7 @@ export default function Home() {
   const viewMore = 6;
   const [allCountries, setAllCountries] = useState([]);
   const [sortedCountries, setSortedCountries] = useState([]);
-  const [countDisplayedCountries, setDisplayedCountries] = useState(viewMore - 1);
+  const [countDisplayedCountries, setDisplayedCountries] = useState(viewMore);
 
   useEffect(() => {
     fetch(config.COUNTRIES_GET_ALL_URL)
@@ -26,10 +25,13 @@ export default function Home() {
   return (
     <>
       <div className={styles.main}>
-        <div>
-          <CountrySearch {...{allCountries, setSortedCountries, setDisplayedCountries, viewMore}}/>
-        </div>
-        <CountriesTable {...{sortedCountries, setSortedCountries, countDisplayedCountries, setDisplayedCountries, viewMore}}/>
+        <CountriesTable {...{
+          allCountries,
+          sortedCountries,
+          setSortedCountries,
+          countDisplayedCountries,
+          setDisplayedCountries,
+          viewMore}}/>
       </div>
     </>
   )

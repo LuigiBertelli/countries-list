@@ -2,6 +2,7 @@ $dark-theme: false !default;
 $primary-color: #eb4e0a !default;
 $accent-color: #ffff00 !default;
 $text-color: #ddd !default;
+$off-white: #fbfbf8;
 
 @if $dark-theme {
     $primary-color: #100c13;

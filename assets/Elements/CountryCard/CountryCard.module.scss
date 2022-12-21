@@ -1,8 +1,8 @@
 @import 'assets/Styles/colors';
 
-$border-button-color: rgba(0, 0, 0, 0.8) !default;
+$border-button-color: black !default;
 @if $dark-theme {
-  $border-button-color: rgba(255, 255, 255, 0.8);
+  $border-button-color: $off-white;
 }
 
 $border-button: 2px solid $border-button-color;
@@ -15,7 +15,7 @@ $shadow-color: rgba(0, 0, 0, 0.5);
     width: 22rem;
     height: 25rem;
     margin: 0 auto;
-    background: $text-color;
+    background-color: $off-white;
     border-radius: 15px;
     box-shadow: 0 15px 60px $shadow-color;
     transition: transform .3s ease-in;

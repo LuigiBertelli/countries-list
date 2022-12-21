@@ -1,0 +1,10 @@
+@import 'assets/Styles/colors';
+@import 'assets/Styles/font';
+
+.sort {
+    background-color: $off-white;
+    border-radius: 10px;
+    outline: none;
+    font-size: $font-medium;
+    padding: 0.5rem;
+}
