@@ -1,5 +1,6 @@
 {
     "en": {
-        "buttonText": "show more"
+        "buttonText": "show more",
+        "searchPlaceHolder": "Country Name - i.e: Brazil"
     }
 }

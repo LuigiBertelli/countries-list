@@ -1,4 +1,5 @@
 @import 'assets/Styles/colors';
+@import 'assets/Styles/font';
 
 .container {
     display: flex;
@@ -18,6 +19,28 @@
         align-items: flex-start;
         align-content: space-around;
         margin-bottom: 2rem;
+
+        .search-input {
+            float: right;
+            background-color: $off-white;
+            border: 1px solid black;
+            border-radius: 40px;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+            width: 50%;
+            padding: 0.5rem ;
+            font-size: $font-medium;
+        }
+
+        .sort {
+            background-color: $off-white;
+            border-radius: 10px;
+            outline: none;
+            font-size: $font-medium;
+            padding: 0.5rem;
+        }
+
     }
 
     .grid {
