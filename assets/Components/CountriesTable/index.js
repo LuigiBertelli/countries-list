@@ -4,8 +4,6 @@ import { useRouter } from 'next/router'
 
 import { CountryCard } from '../../Elements/CountryCard'
 
-import styles from './CountriesTable.module.scss'
-
 import lang from './Lang.json'
 
 import config from '../../Configs/config.json'
@@ -31,14 +29,14 @@ const options =  [
         value: 3,
         title: "Populational Order (Higher - Lower)",
         sortFunc: function(a, b) {
-                return a.population - b.population;
+                return b.population - a.population;
             },
     },
     { 
         value: 4,
         title: "Populational Order (Lower - Higher)",
         sortFunc: function(a, b) {
-                return b.population - a.population;
+                return a.population - b.population;
             },
     }
 ];
@@ -58,11 +56,12 @@ export const CountriesTable = (props) => {
             .then((res) => res.json())
             .then((data) => {
                 setAllCountries(data);
-                setSortedCountries(data);
             })
             .catch((err) => console.log('Error getting Countries', err.message));
-            
         }, [])
+
+    useEffect(() => handleSort(), [allCountries])
+
 
     const viewMoreCountries = () => {
         setCountDisplayedCountries(countDisplayedCountries + viewMore);
@@ -80,17 +79,18 @@ export const CountriesTable = (props) => {
 
     
     const handleSort = () => {
-        const sortOrder = options.find(el => el.value == sortRef.current.value);
+        const sortSlected = sortRef.current.value;
+        const sortOrder = options.find(el => el.value == sortSlected);
         setAllCountries(allCountries.sort(sortOrder.sortFunc));
         handleSearch();
     } 
 
     return (
 
-        <div className={styles.container}>
-            <div className={styles.filter}>
+        <div className={props.styles.container}>
+            <div className={props.styles.filter}>
                     <select
-                        className={styles.sort}
+                        className={props.styles.sort}
                         onChange={handleSort}
                         ref={sortRef}
                     >
@@ -106,7 +106,7 @@ export const CountriesTable = (props) => {
                     </select>
                     
                     <input 
-                        className={styles['search-input']} 
+                        className={props.styles['search-input']} 
                         onChange={handleSearch} 
                         ref={searchRef} 
                         type="text"
@@ -114,7 +114,7 @@ export const CountriesTable = (props) => {
 
                         </input>
             </div>
-            <div className={styles.grid}>
+            <div className={props.styles.grid}>
             {
                 sortedCountries.map((country, index) => {
                     return index <= countDisplayedCountries - 1 &&
@@ -126,14 +126,15 @@ export const CountriesTable = (props) => {
                             callback={() => router.push(
                                 '/country/[countryName]',
                                  `/country/${country.name.common}`
-                            )} />
+                            )} 
+                            styles={props.styles}/>
                     
                 })
             }
             </div>
             {
                 (countDisplayedCountries > 0 && countDisplayedCountries < sortedCountries.length) && 
-               <button className={styles.more} onClick={viewMoreCountries} type="button" >{lang.en.buttonText}</button>
+               <button className={props.styles.more} onClick={viewMoreCountries} type="button" >{lang.en.buttonText}</button>
             }
         </div>
     )

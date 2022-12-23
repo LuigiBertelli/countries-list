@@ -1,0 +1,75 @@
+@import 'assets/Styles/colors';
+@import 'assets/Styles/font';
+@import 'assets/Styles/CountryCard';
+
+@mixin CountriesTable($styles) {
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        padding: 2rem;
+        
+        width: 100%;
+    
+        .filter {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            align-content: space-around;
+            margin-bottom: 2rem;
+    
+            .search-input {
+                float: right;
+                background-color: rgb(199, 194, 194);
+                border: 1px solid black;
+                border-radius: 40px;
+                outline: none;
+                position: relative;
+                overflow: hidden;
+                width: 50%;
+                padding: 0.5rem ;
+                font-size: $font-medium;            
+                color: rgb(69, 66, 66);
+            }
+    
+            .sort {
+                color: rgb(69, 66, 66);
+                background-color: rgb(198, 192, 192);
+                border-radius: 10px;
+                outline: none;
+                font-size: $font-medium;
+                padding: 0.5rem;
+            }
+    
+        }
+    
+        .grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+
+            @include CountryCard($styles);
+        }
+        
+        button.more {
+            cursor: pointer;
+    
+            color: $text-color;
+            font-size: 1.25rem;
+            padding: 0.75rem;
+    
+            background-color: darken($primary-color, 20%);
+            box-shadow: 0 5px 10px rgb(86, 83, 83);
+            border: 1px solid #000;
+            border-radius: 40px;
+        }
+    }
+    
+}

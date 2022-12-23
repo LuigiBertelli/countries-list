@@ -1,29 +1,25 @@
 @import 'assets/Styles/colors';
 
-$border-button-color: black !default;
-@if $dark-theme {
-  $border-button-color: $off-white;
-}
 
-$border-button: 2px solid $border-button-color;
-$shadow-color: rgba(0, 0, 0, 0.5);
+@mixin CountryCard($styles) {
+  $border-button: 2px solid map-get($styles, "border-button-color");
 
-
-.card {
+  .card {
     display: flex;
     position: relative;
-    width: 22rem;
+    width: 25rem;
     height: 25rem;
-    margin: 0 auto;
-    background-color: $off-white;
-    border-radius: 15px;
-    box-shadow: 0 15px 60px $shadow-color;
+    background-color: map-get($styles, "card-bg");
+    border-radius: 25rem;
+    box-shadow: 0 15px 60px map-get($styles, "shadow-color");
     transition: transform .3s ease-in;
     transform: scale(0.9);
+    font-size: medium;
+
 
     &:hover {
       transform: scale(1);
-      box-shadow: 0 18px 65px $shadow-color;
+      box-shadow: 0 18px 65px map-get($styles, "shadow-color");
     }
 
     .face {
@@ -44,28 +40,31 @@ $shadow-color: rgba(0, 0, 0, 0.5);
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-
+        
         h2 {
+          text-align: center;
+          color: map-get($styles, "text-color");
           margin: 0;
           margin-bottom: 1rem;
-          padding: 0;
+          padding: 0 10%;
         }
 
         .flag {
-          height: 12rem;
-          max-width: 80%;
+          height: 10rem;
+          width: 17rem;
           margin-bottom: 2rem;
+          border: 1px solid rgba(#000, .3);
         }
 
         .details {
           cursor: pointer;
-          background-color: $primary-color;
-          color: $text-color;
+          background-color: map-get($styles, "primary-color");
+          color: $off-white;
           padding: 0.5rem;
           font-size: 1.2rem;
           width: 10rem;
           border: none;
-          box-shadow: 0 5px 10px darken($primary-color, 30%);
+          box-shadow: 0 5px 10px map-get($styles, "shadow-color");
           position: relative;
 
           &::before, &::after {
@@ -105,4 +104,5 @@ $shadow-color: rgba(0, 0, 0, 0.5);
         }
       }
     }
+}
 }

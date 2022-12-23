@@ -1,10 +1,8 @@
-$dark-theme: true !default;
-$primary-color: #eb4e0a !default;
-$accent-color: #ffff00 !default;
-$text-color: #ddd !default;
+$dark: #1e1e1e;
 $off-white: #fbfbf8;
-
-@if $dark-theme {
-    $primary-color: #100c13;
-    $accent-color: #73084e;
-}
+$grey: #716c6c;
+$dark-orange: #7f3d3d80;
+$primary-color: #eb4e0a;
+$accent-color: #ffff00;
+$primary-color--dark: #151515;
+$accent-color--dark: #313032;

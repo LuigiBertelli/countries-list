@@ -1,8 +1,48 @@
 @import 'assets/Styles/colors';
 
+@import 'assets/Styles/CountriesTable';
+
+$text-color : $dark;
+$text-color--dark : $off-white;
+
+$styles: (
+  "primary-color": $primary-color,
+  "accent-color": $accent-color,
+  "shadow-color": $dark,
+  "border-button-color": $dark,
+  "card-bg": $off-white,
+  "text-color": $text-color,
+  "filter-bg": $off-white,
+);
+
+$styles--dark: (
+  "primary-color": $primary-color--dark,
+  "accent-color": $accent-color--dark,
+  "shadow-color": $dark-orange,
+  "border-button-color": $off-white,
+  "card-bg": $grey,
+  "text-color": $text-color--dark,
+  "filter-bg": $grey,
+);
+
 .main {
   display: block;
   min-height: 100vh;
   padding: 5%;
-  background-image: linear-gradient(to bottom right, $primary-color, $accent-color);
+
+  &.light {
+    background-image: linear-gradient(to bottom right, $primary-color, $accent-color);
+    color: $text-color;
+
+    @include CountriesTable($styles);
+  }
+
+  &.dark{
+    background-image: linear-gradient(to bottom right, $primary-color--dark, $accent-color--dark);
+    color: $text-color--dark;
+
+    @include CountriesTable($styles--dark);
+  }
 }
+
+
