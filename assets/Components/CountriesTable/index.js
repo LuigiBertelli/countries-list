@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 
 import { CountryCard } from '../../Elements/CountryCard'
 
+import constants from './Constants.json'
+
 import lang from './Lang.json'
 
 import config from '../../Configs/config.json'
@@ -48,6 +50,8 @@ export const CountriesTable = (props) => {
     const [allCountries, setAllCountries] = useState([]);
     const [sortedCountries, setSortedCountries] = useState([]);
     const [countDisplayedCountries, setCountDisplayedCountries] = useState(viewMore);
+    const [selectedContinents, setSelectedContinents] = useState([]);
+    const [detailedCountry, setDetailedCountry] = useState();
     const searchRef = useRef();
     const sortRef = useRef();
 
@@ -62,72 +66,97 @@ export const CountriesTable = (props) => {
 
     useEffect(() => handleSort(), [allCountries])
 
+    useEffect(() => handleFilter(), [selectedContinents]);
+
 
     const viewMoreCountries = () => {
         setCountDisplayedCountries(countDisplayedCountries + viewMore);
     }
 
-    const handleSearch = () => {
+    const handleFilter = () => {
 
-        const searchCountry = allCountries.filter(country => country.name.common.toUpperCase().includes(searchRef.current.value.trim().toUpperCase()));
+        let searchCountry = allCountries.filter(country => country.name.common.toUpperCase().includes(searchRef.current.value.trim().toUpperCase()));
+        if(searchCountry && selectedContinents.length > 0) {
+            searchCountry =  searchCountry.filter(country => selectedContinents.find(continent => country.continents.find(el => el === continent)));
+        }
+
         const numberDisplayCountries = !searchCountry || searchCountry.length === -1 ? 0 :
-            ( searchCountry && searchCountry.length < viewMore ? searchCountry.length : viewMore);
-        
+                ( searchCountry && searchCountry.length < viewMore ? searchCountry.length : viewMore);
+
         setCountDisplayedCountries(numberDisplayCountries);
         setSortedCountries(searchCountry);
+        
+        
     }
 
     
     const handleSort = () => {
-        const sortSlected = sortRef.current.value;
-        const sortOrder = options.find(el => el.value == sortSlected);
+        const sortSelected = sortRef.current.value;
+        const sortOrder = options.find(el => el.value == sortSelected);
         setAllCountries(allCountries.sort(sortOrder.sortFunc));
-        handleSearch();
+        handleFilter();
     } 
 
     return (
 
         <div className={props.styles.container}>
-            <div className={props.styles.filter}>
-                    <select
-                        className={props.styles.sort}
-                        onChange={handleSort}
-                        ref={sortRef}
-                    >
-                        {
-                            options.map((option, index) => (
-                                <option 
-                                    key={index}
-                                    value={option.value}>
-                                        {option.title}
-                                    </option>
-                            ))
-                        }
-                    </select>
-                    
-                    <input 
-                        className={props.styles['search-input']} 
-                        onChange={handleSearch} 
-                        ref={searchRef} 
-                        type="text"
-                        placeholder={lang.en.searchPlaceHolder}>
+            <div className={props.styles.search}>
+                <input 
+                    className={props.styles['search-input']} 
+                    onChange={handleFilter} 
+                    ref={searchRef} 
+                    type="text"
+                    placeholder={lang.en.searchPlaceHolder}>
 
-                        </input>
+                    </input>
+            </div>
+            <div className={props.styles.filter}>
+                <select
+                            className={props.styles.sort}
+                            onChange={handleSort}
+                            ref={sortRef}
+                        >
+                            {
+                                options.map((option, index) => (
+                                    <option 
+                                        key={index}
+                                        value={option.value}>
+                                            {option.title}
+                                        </option>
+                                ))
+                            }
+                </select>
+                {
+                    constants.continents.map((continent, index) => (
+                        <button 
+                            type="button"
+                            key={index}
+                            className={`${props.styles["continent-filter"]} ${selectedContinents.find(cont => cont === continent) ? props.styles.active: ''}`}
+                            onClick={() => {
+                                if(selectedContinents.find(el => el === continent)){
+                                    const auxContinents = selectedContinents.filter(cont => cont !== continent);
+                                    setSelectedContinents(auxContinents)
+                                } else {
+                                    setSelectedContinents([...selectedContinents, continent]);
+                                }
+                            }} >{continent}</button>))
+                }
             </div>
             <div className={props.styles.grid}>
             {
                 sortedCountries.map((country, index) => {
-                    return index <= countDisplayedCountries - 1 &&
-                        <CountryCard
-                            key={index}
-                            countryName={country.name.common}
-                            flag={country.flag}
-                            imgSrc={country.flags.png}
-                            callback={() => router.push(
-                                '/country/[countryName]',
-                                 `/country/${country.name.common}`
-                            )} 
-                            styles={props.styles}/>
+                    if (detailedCountry === country) 
+                        return null;
+                    else if (index <= countDisplayedCountries - 1)
+                        return (
+                            <CountryCard
+                                key={index}
+                                countryName={country.name.common}
+                                flag={country.flag}
+                                imgSrc={country.flags.png}
+                                callback={() => setDetailedCountry(country)} 
+                                styles={props.styles}/>);
+                            
                     
                 })
             }

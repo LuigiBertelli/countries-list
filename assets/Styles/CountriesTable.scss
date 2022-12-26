@@ -4,6 +4,9 @@
 
 @mixin CountriesTable($styles) {
 
+    $filter-bg: $off_white;
+    $filter-color: darken($grey, 5%);
+
     .container {
         display: flex;
         flex-direction: column;
@@ -12,6 +15,22 @@
         padding: 2rem;
         
         width: 100%;
+
+        .search {
+            .search-input {
+                float: right;
+                background-color: $filter-bg;
+                color: $filter-color;
+                border: 1px solid $grey;
+                border-radius: 40px;
+                outline: none;
+                position: relative;
+                overflow: hidden;
+                width: 50%;
+                padding: 0.5rem ;
+                font-size: $font-medium;
+            }
+        }
     
         .filter {
             width: 100%;
@@ -23,27 +42,38 @@
             align-content: space-around;
             margin-bottom: 2rem;
     
-            .search-input {
-                float: right;
-                background-color: rgb(199, 194, 194);
-                border: 1px solid black;
-                border-radius: 40px;
-                outline: none;
-                position: relative;
-                overflow: hidden;
-                width: 50%;
-                padding: 0.5rem ;
-                font-size: $font-medium;            
-                color: rgb(69, 66, 66);
-            }
-    
             .sort {
-                color: rgb(69, 66, 66);
-                background-color: rgb(198, 192, 192);
+                color: $filter-color;
+                background-color: $filter-bg;
                 border-radius: 10px;
                 outline: none;
                 font-size: $font-medium;
                 padding: 0.5rem;
+            }
+
+            .continent-filter {
+                cursor: pointer;
+                color: $filter-color;
+                background-color: $filter-bg;
+                border: 1px solid $grey;
+                border-radius: 5rem;
+                padding: 0.5rem 0.75rem;
+
+                &.active{
+                    background-color: $blue;
+                    color: $off-white;
+
+                    &:hover{
+                        opacity: 0.9;
+                        color: $off-white;
+                        background-color: $blue;
+                    }
+                }
+
+                &:hover{
+                    color: $blue;
+                    background-color: darken($filter-bg, 10%);
+                }
             }
     
         }
