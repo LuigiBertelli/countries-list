@@ -1,11 +1,9 @@
 @import 'assets/Styles/colors';
 @import 'assets/Styles/font';
 @import 'assets/Styles/CountryCard';
+@import 'assets/Styles/CountryDetails';
 
 @mixin CountriesTable($styles) {
-
-    $filter-bg: $off_white;
-    $filter-color: darken($grey, 5%);
 
     .container {
         display: flex;
@@ -15,68 +13,6 @@
         padding: 2rem;
         
         width: 100%;
-
-        .search {
-            .search-input {
-                float: right;
-                background-color: $filter-bg;
-                color: $filter-color;
-                border: 1px solid $grey;
-                border-radius: 40px;
-                outline: none;
-                position: relative;
-                overflow: hidden;
-                width: 50%;
-                padding: 0.5rem ;
-                font-size: $font-medium;
-            }
-        }
-    
-        .filter {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            align-items: flex-start;
-            align-content: space-around;
-            margin-bottom: 2rem;
-    
-            .sort {
-                color: $filter-color;
-                background-color: $filter-bg;
-                border-radius: 10px;
-                outline: none;
-                font-size: $font-medium;
-                padding: 0.5rem;
-            }
-
-            .continent-filter {
-                cursor: pointer;
-                color: $filter-color;
-                background-color: $filter-bg;
-                border: 1px solid $grey;
-                border-radius: 5rem;
-                padding: 0.5rem 0.75rem;
-
-                &.active{
-                    background-color: $blue;
-                    color: $off-white;
-
-                    &:hover{
-                        opacity: 0.9;
-                        color: $off-white;
-                        background-color: $blue;
-                    }
-                }
-
-                &:hover{
-                    color: $blue;
-                    background-color: darken($filter-bg, 10%);
-                }
-            }
-    
-        }
     
         .grid {
             display: flex;
@@ -86,19 +22,22 @@
             width: 100%;
 
             @include CountryCard($styles);
+
+            @include CountryDetails($styles)
         }
         
         button.more {
             cursor: pointer;
     
-            color: $text-color;
+            color: map-get($styles, "text-color");
             font-size: 1.25rem;
             padding: 0.75rem;
     
-            background-color: darken($primary-color, 20%);
+            background-color: darken(map-get($styles, "primary-color"), 20%);
             box-shadow: 0 5px 10px rgb(86, 83, 83);
             border: 1px solid #000;
             border-radius: 40px;
+            margin-top: 2rem;
         }
     }
     

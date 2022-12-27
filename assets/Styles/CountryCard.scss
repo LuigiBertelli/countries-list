@@ -11,6 +11,7 @@
     height: 25rem;
     font-size: medium;
 
+
     .face {
       
       background-color: map-get($styles, "card-bg");
@@ -40,19 +41,21 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        
+        height: 100%;
+        width: 100%;
+        padding: 5%;
+
         h2 {
           text-align: center;
           color: map-get($styles, "text-color");
           margin: 0;
-          margin-bottom: 1rem;
           padding: 0 10%;
         }
 
         .flag {
           height: 10rem;
           width: 17rem;
-          margin-bottom: 2rem;
+          max-width: 90%;
           border: 1px solid rgba(#000, .3);
         }
 
@@ -62,7 +65,7 @@
           color: $off-white;
           padding: 0.5rem;
           font-size: 1.2rem;
-          width: 10rem;
+          width: 70%;
           border: none;
           box-shadow: 0 5px 10px map-get($styles, "shadow-color");
           position: relative;
@@ -104,5 +107,55 @@
         }
       }
     }
-}
+
+    @media screen and  (max-width: 850px){
+      width: 17.5rem;
+      height: 19rem;
+
+      .face {
+        
+        border-radius: 50rem;
+        .content{
+        
+          h2 {
+            font-size: 1.3rem;
+          }
+  
+          .flag {
+            height: 8rem;
+            width: 13rem;
+          }
+  
+          .details {
+            padding: 0.4rem;
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+
+    @media screen and (min-width: 851px) and (max-width: 1250px){
+        width: 20rem;
+        height: 20rem;
+
+        .face {
+          .content{
+          
+            h2 {
+              font-size: 1.5rem;
+            }
+    
+            .flag {
+              height: 10rem;
+              width: 15rem;
+            }
+    
+            .details {
+              padding: 0.4rem;
+              font-size: 1.2rem;
+            }
+          }
+        }
+    }
+  }
 }
