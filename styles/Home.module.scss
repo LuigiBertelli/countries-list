@@ -31,6 +31,38 @@ $filter-color: darken($grey, 5%);
   display: block;
   min-height: 100vh;
 
+  &.loading {
+    &::after {
+      content: " ";
+      display: block;
+      width: 64px;
+      height: 64px;
+      margin: 10% auto;
+      border-radius: 50%;
+      border: 6px solid #fff;
+      border-color: #fff transparent #fff transparent;
+      animation: loading-ring 1.2s linear infinite;
+    }
+  }
+
+  @keyframes loading-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    25% {
+      transform: rotate(135deg);
+    }
+
+    75% {
+      transform: rotate(270deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   .nav {
     display: table;
     width: 100vw;

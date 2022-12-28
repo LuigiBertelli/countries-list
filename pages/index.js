@@ -30,6 +30,7 @@ export default function Home() {
     const [sortedCountries, setSortedCountries] = useState([]);
     const [countDisplayedCountries, setCountDisplayedCountries] = useState(viewMore);
     const [selectedContinents, setSelectedContinents] = useState([]);
+    const [loading, setLoading] = useState(true);
     const searchRef = useRef();
     const sortRef = useRef();
 
@@ -37,9 +38,14 @@ export default function Home() {
         fetch(config.COUNTRIES_GET_ALL_URL)
             .then((res) => res.json())
             .then((data) => {
-                setAllCountries(data);
+              
+                setTimeout(() => {
+                  setLoading(false);
+                  setAllCountries(data);
+                },  1000);
             })
             .catch((err) => console.log('Error getting Countries', err.message));
+        
         }, [])
 
     useEffect(() => handleSort(), [allCountries])
@@ -75,7 +81,7 @@ export default function Home() {
 
   return (
     <>
-      <div className={ `${styles.main} ${styles[`${theme}`]}`}>
+      <div className={ `${styles.main} ${styles[`${theme}`]} ${loading && styles.loading}`}>
         
       
         <div className={styles.nav}>
