@@ -18,22 +18,23 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-around;
+            justify-content: flex-start;
+            align-content: stretch;
+            align-items: stretch;
             width: 100%;
 
             @include CountryCard($styles);
 
-            @include CountryDetails($styles)
+            @include CountryDetails($styles);
+            
         }
         
         button.more {
-            cursor: pointer;
-    
             color: map-get($styles, "text-color");
             font-size: 1.25rem;
             padding: 0.75rem;
     
-            background-color: darken(map-get($styles, "primary-color"), 20%);
+            background-color: map-get($styles, "card-bg");
             box-shadow: 0 5px 10px rgb(86, 83, 83);
             border: 1px solid #000;
             border-radius: 40px;

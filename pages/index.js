@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { CountriesTable } from '../assets/Components/CountriesTable'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlassLocation, faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons'
 
 import constants from '../assets/Constants/Constants.json'
 
@@ -46,7 +46,10 @@ export default function Home() {
 
     useEffect(() => handleFilter(), [selectedContinents]);
 
-    const handleFilter = () => {
+    const handleFilter = (event) => {
+
+        if(event)
+          event.preventDefault();
 
         let searchCountry = allCountries.filter(country => country.name.common.toUpperCase().includes(searchRef.current.value.trim().toUpperCase()));
         if(searchCountry && selectedContinents.length > 0) {
@@ -75,18 +78,21 @@ export default function Home() {
       <div className={ `${styles.main} ${styles[`${theme}`]}`}>
         
       
-        <div className={styles.search}>
-            <input 
-                className={styles['search-input']} 
-                onChange={handleFilter} 
-                ref={searchRef} 
-                type="text"
-                placeholder={lang.en.searchPlaceHolder}>
-
-              </input>
-              <buttton type="button" onClick={toggleTheme}>
-                <FontAwesomeIcon icon={faCircleHalfStroke}/>
-              </buttton>
+        <div className={styles.nav}>
+              <form className={styles["search-container"]}  onSubmit={handleFilter} >
+                <input 
+                  className={styles["search-input"]} 
+                  ref={searchRef} 
+                  type="text"
+                  placeholder={lang.en.searchPlaceHolder}>
+                </input>
+                <button type="submit" className={styles["search-btn"]}>
+                  <FontAwesomeIcon icon={faMagnifyingGlassLocation} className={styles["search-btn-icon"]}/>
+                </button>
+              </form>
+              <div className={styles["toggle-theme"]}>
+                <FontAwesomeIcon icon={faCircleHalfStroke} onClick={toggleTheme} className={styles["toggle-theme-button"]}/>
+              </div>
         </div>
         <div className={styles.filter}>
             <select

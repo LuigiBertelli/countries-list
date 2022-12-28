@@ -30,21 +30,56 @@ $filter-color: darken($grey, 5%);
 .main {
   display: block;
   min-height: 100vh;
-  padding: 5%;
 
-  .search {
-    .search-input {
-        float: right;
-        background-color: $filter-bg;
-        color: $filter-color;
-        border: 1px solid $grey;
-        border-radius: 40px;
+  .nav {
+    display: table;
+    width: 100vw;
+    padding: 1% 3%;
+
+    .search-container {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      left: 30%;
+      background-color: $filter-bg;
+      color: $filter-color;
+      border: 1px solid $grey;
+      border-radius: 40px;
+      overflow: hidden;
+      width: 40vw;
+      padding-right: 0.6rem;
+      font-size: $font-medium;
+        
+      .search-input {
+        border: none;
         outline: none;
+        padding: 0.5rem;
+        flex: 1 0 0 auto;
+      }
+
+      .search-btn {
         position: relative;
-        overflow: hidden;
-        width: 50%;
-        padding: 0.5rem ;
-        font-size: $font-medium;
+        float: right;
+        background: none;
+        border: none;
+        outline: none;
+        .search-btn-icon {
+          width: $font-medium;
+          height: $font-medium;
+        }
+      }
+    }
+
+    .toggle-theme {
+      display: table-cell;
+      vertical-align: baseline;
+      position: relative;
+      float: right;
+
+      .toggle-theme-button{
+        cursor: pointer;
+      }
     }
   }
 
@@ -56,7 +91,7 @@ $filter-color: darken($grey, 5%);
       justify-content: space-around;
       align-items: flex-start;
       align-content: space-around;
-      margin-bottom: 2rem;
+      margin: 3rem 0;
 
       .sort {
           color: $filter-color;
@@ -68,12 +103,12 @@ $filter-color: darken($grey, 5%);
       }
 
       .continent-filter {
-          cursor: pointer;
           color: $filter-color;
           background-color: $filter-bg;
           border: 1px solid $grey;
           border-radius: 5rem;
           padding: 0.5rem 0.75rem;
+          font-weight: 600;
 
           &.active{
               background-color: $blue;

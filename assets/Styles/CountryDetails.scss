@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong');
+
 @mixin CountryDetails($styles) {
     .country-container {
         position: fixed;
@@ -21,20 +23,20 @@
         color: map-get($styles, "text-color");;
         opacity: 1;
         z-index: 25;
-        left: 25%;
-        top: 7%;
+        width: 50vw;
+        left: 25vw;
+        top: 7vh;
         border-radius: 1rem;
-        width: 50%;
         padding: 2rem;
 
-        @media screen and  (max-width: 850px){
-            width: 90%;
-            left: 5%;
+        @media screen and  (max-width: 650px){
+            width: 80vw;
+            left: 10vw;
         }
 
-        @media screen and (min-width: 851px) and (max-width: 1250px){
-            width: 70%;
-            left: 15%;
+        @media screen and (min-width: 651px) and (max-width: 950px){
+            width: 60vw;
+            left: 20vw;
         }
 
         
@@ -55,8 +57,25 @@
 
             align-content: center;
 
-            img {
-                max-width: 80%;
+            :nth-child(n){
+                margin-bottom: 2%;
+            }
+
+            .name {
+                font-family: "Audiowide", sans-serif;
+                text-align: center;
+            }
+
+            .flag {
+                flex: 1 0 auto;
+                max-width: 90%;
+                max-height: 70%;
+                border: 1px solid rgba(#000, .3);
+            }
+            
+            .detail {
+                font-size: $font-medium;
+                font-family: "Trirong", serif;
             }
         }
     }

@@ -87,6 +87,7 @@ body,
 }
 
 body {
+  font-family: var(--font-mono);
   color: rbg(--foreground-rgb);
   background: linear-gradient(
       to bottom,
@@ -101,6 +102,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  cursor: pointer;
+}
+ 
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
